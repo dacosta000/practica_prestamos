@@ -34,3 +34,9 @@
    Porque mientras un préstamo permanece en estado `borrador`, otro usuario puede prestar ese mismo equipo en otro préstamo o enviarlo a mantenimiento. Al pulsar `Prestar`, el sistema debe volver a comprobar en tiempo real que el equipo siga disponible.
 2. **¿En qué momento se ejecuta un método con `@api.constrains`? ¿Y la validación de `action_prestar`?**
    `@api.constrains` se ejecuta automáticamente cada vez que se crea o guarda (`create` / `write`) un registro en la base de datos. En cambio, la validación dentro de `action_prestar` se ejecuta únicamente cuando el usuario presiona el botón Prestar.
+
+### Paso 6. Contacto, kanban y búsqueda
+1. **¿Qué pasa si arrastra una tarjeta del kanban a otra columna? ¿Por qué?**
+   La tarjeta se mueve de columna y el campo `estado` del equipo se actualiza automáticamente al valor de esa columna, porque la vista kanban está agrupada por `estado` (`default_group_by="estado"`).
+2. **El campo `prestamo_ids` se agregó a `res.partner`. ¿Se crea una columna nueva en la tabla de contactos? Explique.**
+   No se crea ninguna columna nueva en la tabla `res_partner`. Los campos `One2many` son virtuales en el ORM y consultan dinámicamente los registros de `prestamo_prestamo` filtrando por la clave foránea `partner_id` que ya existe en la tabla de préstamos.
