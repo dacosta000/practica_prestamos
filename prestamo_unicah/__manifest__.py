@@ -6,7 +6,7 @@
     "author": "Tu Nombre Completo",
     "depends": ["mail"],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "data/prestamo_equipo_data.xml",
         "views/prestamo_equipo_views.xml",
         "views/prestamo_views.xml",
