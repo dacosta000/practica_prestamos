@@ -16,3 +16,9 @@
    `_name = "prestamo.prestamo"` crea un modelo nuevo con su propia tabla en PostgreSQL, mientras que `_inherit = ["mail.thread"]` incorpora (mezcla) los campos y métodos de mensajería y seguimiento de cambios (chatter) dentro de ese modelo nuevo.
 2. **¿Qué hace `tracking=True` en el campo `state`?**
    Registra automáticamente en el chatter del formulario cada cambio de valor que sufra el campo `state` (quién lo cambió, cuándo y cuál era el valor anterior y el nuevo).
+
+### Paso 3. Equipos del préstamo
+1. **En `fields.One2many("prestamo.linea", "prestamo_id")`, ¿qué indica cada parámetro?**
+   El primer parámetro (`"prestamo.linea"`) indica el modelo hijo donde están las líneas, y el segundo (`"prestamo_id"`) indica el campo `Many2one` en ese modelo hijo que apunta de regreso al préstamo padre.
+2. **¿Qué pasa con las líneas cuando se borra un préstamo? ¿Qué parte del código lo define?**
+   Se eliminan automáticamente en cascada junto con el préstamo. Lo define el parámetro `ondelete="cascade"` en el campo `prestamo_id` del modelo `prestamo.linea`.
