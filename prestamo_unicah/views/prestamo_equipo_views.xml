@@ -22,6 +22,7 @@
                     <group>
                         <group>
                             <field name="name"/>
+                            <field name="veces_prestado"/>
                         </group>
                         <group>
                             <field name="codigo"/>
@@ -48,6 +49,7 @@
                         </div>
                         <div>Código: <field name="codigo"/></div>
                         <div>Categoría: <field name="categoria"/></div>
+                        <div>Veces prestado: <field name="veces_prestado"/></div>
                     </t>
                 </templates>
             </kanban>
