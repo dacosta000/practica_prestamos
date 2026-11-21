@@ -22,10 +22,12 @@
                 <header>
                     <button name="action_prestar" string="Prestar" type="object"
                             class="btn-primary" invisible="state != 'borrador'"/>
+                    <button name="action_marcar_atrasado" string="Marcar atrasado" type="object"
+                            class="btn-warning" invisible="state != 'prestado'"/>
                     <button name="action_devolver" string="Devolver" type="object"
                             class="btn-primary" invisible="state not in ('prestado', 'atrasado')"/>
                     <field name="state" widget="statusbar"
-                           statusbar_visible="borrador,prestado,devuelto"/>
+                           statusbar_visible="borrador,prestado,atrasado,devuelto"/>
                 </header>
                 <sheet>
                     <div class="oe_title">

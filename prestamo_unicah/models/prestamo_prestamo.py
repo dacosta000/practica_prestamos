@@ -115,3 +115,17 @@ class PrestamoPrestamo(models.Model):
             prestamo.linea_ids.equipo_id.write({"estado": "disponible"})
             prestamo.state = "devuelto"
             prestamo.message_post(body="Los equipos fueron devueltos.")
+
+    def action_marcar_atrasado(self):
+        hoy = fields.Date.context_today(self)
+        for prestamo in self:
+            if prestamo.state != "prestado":
+                raise UserError("Solo se puede marcar como atrasado un préstamo activo.")
+            if prestamo.fecha_devolucion >= hoy:
+                raise UserError(
+                    "La fecha de devolución aún no ha vencido; no se puede marcar como atrasado."
+                )
+            prestamo.state = "atrasado"
+            prestamo.message_post(
+                body="El préstamo fue marcado como atrasado por vencimiento de fecha."
+            )
