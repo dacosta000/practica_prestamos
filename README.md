@@ -22,3 +22,9 @@
    El primer parámetro (`"prestamo.linea"`) indica el modelo hijo donde están las líneas, y el segundo (`"prestamo_id"`) indica el campo `Many2one` en ese modelo hijo que apunta de regreso al préstamo padre.
 2. **¿Qué pasa con las líneas cuando se borra un préstamo? ¿Qué parte del código lo define?**
    Se eliminan automáticamente en cascada junto con el préstamo. Lo define el parámetro `ondelete="cascade"` en el campo `prestamo_id` del modelo `prestamo.linea`.
+
+### Paso 4. Flujo de estados
+1. **Los botones ya se ocultan según el estado. ¿Por qué los métodos vuelven a validar el estado?**
+   Porque ocultar un botón en la vista XML solo restringe la interfaz visual, pero un usuario o proceso podría invocar el método directamente mediante RPC/API o desde una pestaña desactualizada. Validar en Python garantiza la integridad de la lógica de negocio en el servidor.
+2. **¿Qué hace `prestamo.linea_ids.equipo_id.write(...)`? ¿Por qué no hace falta un `for` para cada equipo?**
+   Toma el recordset con todos los equipos asociados a las líneas del préstamo y actualiza su campo `estado` en una sola operación SQL masiva. En el ORM de Odoo, los recordsets permiten navegar relaciones y ejecutar `write()` sobre múltiples registros a la vez sin iterar manualmente.
